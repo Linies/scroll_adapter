@@ -149,7 +149,6 @@ typedef OnItemLongClickListener<E> = void Function(E item, int postion);
 
 typedef OnItemDoubleClickListener<E> = void Function(E item, int postion);
 
-/// to [view];
 /// 回调接口通知外部[View]setState
 abstract class DataSetCallback {
   /// 所有数据更新
