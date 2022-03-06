@@ -1,5 +1,4 @@
-/// to: [BaseAdapter]
-/// 上层数据更新接口
+/// 数据操作接口
 abstract class DataBuildInterface<E> {
   void add(E item);
 
@@ -20,6 +19,7 @@ abstract class DataBuildInterface<E> {
   int get size;
 }
 
+/// 回调注册以及数据监听接口
 abstract class DataNotifyInterface<E> {
   void registerCallback(DataSetCallback onDataSetChanged);
 
@@ -30,6 +30,18 @@ abstract class DataNotifyInterface<E> {
   void notifyItemChanged(int position);
 }
 
+/// 回调接口通知外部[ListView]更新视图
+abstract class DataSetCallback {
+  /// 所有数据更新
+  void onDataSetChanged();
+
+  /// 指定item范围数据更新
+  void onItemsChanged(int start, int end);
+}
+
+/// [ItemDataManager]实现类：
+/// 维护[_dataList]数据列表对[DataBuildInterface]接口实现，
+/// 维护[_dataSetCallbacks]回调列表对[DataNotifyInterface]接口实现
 mixin ItemDataManager<E>
     implements DataBuildInterface<E>, DataNotifyInterface<E> {
   var _dataList = <E?>[];
@@ -108,6 +120,7 @@ mixin ItemDataManager<E>
   int get size => _dataList.length;
 }
 
+/// 事件调用
 abstract class OnEventListener<E> {
   void onClickCallback(E? item, int position);
 
@@ -116,6 +129,7 @@ abstract class OnEventListener<E> {
   void onLongCallback(E? item, int position);
 }
 
+/// [OnEventWrapper]对[item]点击事件的包装实现
 class OnEventWrapper implements OnEventListener {
   var onItemClickListeners = <OnItemClickListener>[];
   var onItemLongClickListeners = <OnItemLongClickListener>[];
@@ -148,12 +162,3 @@ typedef OnItemClickListener<E> = void Function(E item, int postion);
 typedef OnItemLongClickListener<E> = void Function(E item, int postion);
 
 typedef OnItemDoubleClickListener<E> = void Function(E item, int postion);
-
-/// 回调接口通知外部[View]setState
-abstract class DataSetCallback {
-  /// 所有数据更新
-  void onDataSetChanged();
-
-  /// 指定item范围数据更新
-  void onItemsChanged(int start, int end);
-}

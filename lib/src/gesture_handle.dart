@@ -26,7 +26,7 @@ class GestureWrapper<E> extends StatelessWidget {
 
   final Widget child;
 
-  final GestureBinder? gestureBinder;
+  final EventsBinder? eventsBinder;
 
   final OnEventListener? onEventListener;
 
@@ -39,8 +39,8 @@ class GestureWrapper<E> extends StatelessWidget {
     this.position, {
     required this.gestureItem,
     required this.child,
-    required this.gestureBinder,
-  }) : onEventListener = gestureBinder!.bindGestureItem(item, position);
+    required this.eventsBinder,
+  }) : onEventListener = eventsBinder?.bindGestureItem(item, position);
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -60,6 +60,7 @@ class GestureWrapper<E> extends StatelessWidget {
       );
 }
 
-abstract class GestureBinder<E> {
+/// [OnEventListener]对[item]绑定的接口
+abstract class EventsBinder<E> {
   OnEventListener bindGestureItem(E? item, int position);
 }
