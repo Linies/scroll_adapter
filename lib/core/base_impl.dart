@@ -11,7 +11,7 @@ abstract class DataBuildState<T extends StatefulWidget> extends State<T>
 }
 
 /// 提供一个可直接继承使用的[mixin]类
-mixin DataBuildBase on DataBuildState {
+mixin DataBuildBase<T extends StatefulWidget> on DataBuildState<T> {
   final Map<int, HolderPort> _holders = {};
 
   @override
