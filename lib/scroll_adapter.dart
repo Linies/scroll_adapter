@@ -1,7 +1,4 @@
 library scroll_adapter;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'package:scroll_adapter/arrange_adapter.dart';
+export 'package:scroll_adapter/core/base_impl.dart' show DataBuildAdapter;
