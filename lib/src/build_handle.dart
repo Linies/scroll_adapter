@@ -24,7 +24,6 @@ class ItemHolder<E> extends StatefulWidget implements HolderPort {
 }
 
 class ItemHolderState extends State<ItemHolder> {
-
   @override
   void initState() {
     widget._weakState[widget] = this;
@@ -32,7 +31,8 @@ class ItemHolderState extends State<ItemHolder> {
   }
 
   @override
-  Widget build(BuildContext context) => widget.itemBinder.bindItemView(widget.item, widget.position);
+  Widget build(BuildContext context) =>
+      widget.itemBinder.bindItemView(widget.item, widget.position);
 }
 
 /// [item]绑定器
@@ -41,7 +41,7 @@ mixin ItemViewBinder<E> {
   Widget bindItemView(E? item, int position);
 }
 
-/// [itemView]刷新回调
+/// [itemView]刷新回调接口
 abstract class HolderPort {
   /// [ItemHolder]刷新
   void notify();
@@ -49,8 +49,9 @@ abstract class HolderPort {
 
 /// [itemView]构建器
 abstract class ItemBuildInterface<E> {
-  // 构建holder建立与[onItemUpdate]的视图绑定
+  /// [HolderPort]刷新接口实现类创建
   HolderPort onItemHolderBuild(E? item, int position);
 
+  /// 上层视图构建方法
   Widget onItemUpdate(E? item, int position);
 }

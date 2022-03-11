@@ -46,13 +46,16 @@ abstract class DataBuildAdapter<E>
         ItemDataManager,
         ItemViewBinder<E>,
         ItemBuildInterface<E>,
-        EventsBinder<E> {
+        EventsBinder,
+        EventsListenerManage {
   DataBuildAdapter({required this.state, GestureItemDetector? detector})
       : _gestureCallback = detector;
 
   GestureCallback? _gestureCallback;
 
   DataBuildState? state;
+
+  OnEventListener _onEventListener = OnEventWrapper();
 
   @override
   HolderPort onItemHolderBuild(E? item, int position) =>
@@ -64,6 +67,7 @@ abstract class DataBuildAdapter<E>
 
   @override
   Widget bindItemView(E? item, int position) {
+    // [HolderPort]与上层建立视图进行绑定
     state?._addHolder(position, onItemHolderBuild(item, position));
     return GestureWrapper(
       item,
@@ -75,5 +79,67 @@ abstract class DataBuildAdapter<E>
   }
 
   @override
-  OnEventListener bindGestureItem(E? item, int position) => OnEventWrapper();
+  OnEventListener get bindEventListener => _onEventListener;
+
+  @override
+  void addItemClickListener(OnItemClickListener listener) =>
+      _onEventListener.addItemClickListener(listener);
+
+  @override
+  void addItemLongClickListener(OnItemLongClickListener listener) =>
+      _onEventListener.addItemLongClickListener(listener);
+
+  @override
+  void removeItemClickListener(OnItemClickListener listener) =>
+      _onEventListener.removeItemClickListener(listener);
+
+  @override
+  void removeItemLongClickListener(OnItemClickListener listener) =>
+      _onEventListener.removeItemLongClickListener(listener);
+}
+
+/// 手势和事件监听包装器
+class GestureWrapper<E> extends StatelessWidget {
+  final GestureCallback? gestureItem;
+
+  final Widget child;
+
+  final EventsBinder? eventsBinder;
+
+  final OnEventListener? onEventListener;
+
+  final E? item;
+
+  final int position;
+
+  GestureWrapper(
+    this.item,
+    this.position, {
+    required this.gestureItem,
+    required this.child,
+    required this.eventsBinder,
+  }) : onEventListener = eventsBinder?.bindEventListener;
+
+  @override
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: () {
+          onEventListener?.onClickCallback(item, position);
+        },
+        onDoubleTap: () {
+          onEventListener?.onDoubleCallback(item, position);
+        },
+        onLongPress: () {
+          onEventListener?.onLongCallback(item, position);
+        },
+        onTapDown: (detail) {
+          gestureItem?.onTap(detail);
+        },
+        onDoubleTapDown: (detail) {
+          gestureItem?.onDoubleTap(detail);
+        },
+        onLongPressStart: (detail) {
+          gestureItem?.onLongPress(detail);
+        },
+        child: child,
+      );
 }

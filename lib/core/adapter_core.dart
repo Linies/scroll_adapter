@@ -1,32 +1,45 @@
 /// 数据操作接口
 abstract class DataBuildInterface<E> {
+  /// 新增[item]
   void add(E item);
 
+  /// 新增数组[items]
   void addAll(List<E?> items);
 
+  /// 插入[item]到指定下标
   void insert(int position, E item);
 
+  /// 移除[item]
   void remove(E item);
 
+  /// 移除下标[position]
   void removeAt(int position);
 
+  /// 清除列表
   void clear();
 
+  /// 交换下标位置
   void swap(int current, int next);
 
+  /// 获取下标[position]数据项
   E? item(int position);
 
+  /// 数据长度
   int get size;
 }
 
 /// 回调注册以及数据监听接口
 abstract class DataNotifyInterface<E> {
+  /// 注册数据变化监听器
   void registerCallback(DataSetCallback onDataSetChanged);
 
+  /// 移除数据变化监听器
   void removeCallback(DataSetCallback? onDataSetChanged);
 
+  /// 通知已注册的监听器数据集已更改
   void notifyDataSetChanged();
 
+  /// 通知指定下标的监听器数据集已更改
   void notifyItemChanged(int position);
 }
 
@@ -121,12 +134,28 @@ mixin ItemDataManager<E>
 }
 
 /// 事件调用
-abstract class OnEventListener<E> {
+abstract class OnEventListener<E> implements EventsListenerManage {
+  /// 点击事件回调触发
   void onClickCallback(E? item, int position);
 
+  /// 双击事件回调触发
   void onDoubleCallback(E? item, int position);
 
+  /// 长按事件回调触发
   void onLongCallback(E? item, int position);
+}
+
+/// 事件总线管理
+abstract class EventsListenerManage {
+  /// 添加监听事件
+  void addItemClickListener(OnItemClickListener listener);
+
+  void addItemLongClickListener(OnItemLongClickListener listener);
+
+  /// 移除监听事件
+  void removeItemClickListener(OnItemClickListener listener);
+
+  void removeItemLongClickListener(OnItemLongClickListener listener);
 }
 
 /// [OnEventWrapper]对[item]点击事件的包装实现
@@ -155,10 +184,37 @@ class OnEventWrapper implements OnEventListener {
       listener(item, position);
     }
   }
+
+  /// 添加监听事件
+  void addItemClickListener(OnItemClickListener listener) {
+    onItemClickListeners.add(listener);
+  }
+
+  void addItemLongClickListener(OnItemLongClickListener listener) {
+    onItemLongClickListeners.add(listener);
+  }
+
+  /// 移除监听事件
+  void removeItemClickListener(OnItemClickListener listener) {
+    onItemClickListeners.remove(listener);
+  }
+
+  void removeItemLongClickListener(OnItemLongClickListener listener) {
+    onItemClickListeners.remove(listener);
+  }
 }
 
+/// 事件绑定器
+abstract class EventsBinder {
+  /// [OnEventListener]总线绑定[itemView]
+  OnEventListener get bindEventListener;
+}
+
+/// 点击事件监听
 typedef OnItemClickListener<E> = void Function(E item, int postion);
 
+/// 长按事件监听
 typedef OnItemLongClickListener<E> = void Function(E item, int postion);
 
+/// 双击事件监听
 typedef OnItemDoubleClickListener<E> = void Function(E item, int postion);
