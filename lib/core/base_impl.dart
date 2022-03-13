@@ -45,8 +45,8 @@ abstract class DataBuildAdapter<E>
         ItemBuildInterface<E>,
         EventsBinder,
         EventsListenerManage {
-  DataBuildAdapter({required this.state, GestureItemDetector? detector})
-      : _gestureCallback = detector;
+  DataBuildAdapter({this.state, GestureCallback? gestureCallback})
+      : _gestureCallback = gestureCallback;
 
   GestureCallback? _gestureCallback;
 

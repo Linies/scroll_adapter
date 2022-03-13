@@ -7,7 +7,8 @@ export 'package:scroll_adapter/arrange_adapter.dart'
 
 /// 滑动适配器业务层接口
 abstract class ArrangeAdapter<E> extends DataBuildAdapter<E> {
-  ArrangeAdapter({DataBuildState? state}) : super(state: state);
+  ArrangeAdapter({DataBuildState? state, GestureCallback? gestureCallback})
+      : super(state: state, gestureCallback: gestureCallback);
 }
 
 /// 索引项构建以回调方式给外部的滑动生成函数
@@ -16,7 +17,7 @@ typedef ScrollWithIndexedBuilder = Widget Function(
 
 /// 外部继承独立实现滑动视图的可适配类
 /// [buildScroll]外部在该方法实现具体滑动视图
-abstract class AdaptableScroll extends StatelessWidget {
+abstract class AdaptableScroll extends StatefulWidget {
   final ArrangeAdapter adapter;
 
   AdaptableScroll(this.adapter);
@@ -24,29 +25,27 @@ abstract class AdaptableScroll extends StatelessWidget {
   Widget buildScroll(IndexedWidgetBuilder indexedWidgetBuilder);
 
   @override
-  Widget build(BuildContext context) =>
-      _ArrangeView(adapter, (builder) => buildScroll(builder));
-}
-
-class _ArrangeView extends StatefulWidget {
-  final ArrangeAdapter adapter;
-
-  final ScrollWithIndexedBuilder scrollvIdxBuilder;
-
-  _ArrangeView(this.adapter, this.scrollvIdxBuilder);
-
-  @override
   _ArrangeState createState() => _ArrangeState();
 }
 
-class _ArrangeState extends DataBuildState<_ArrangeView> with DataBuildBase {
+class _ArrangeState extends DataBuildState<AdaptableScroll> with DataBuildBase {
   @override
   void initState() {
-    widget.adapter.state = this;
+    widget.adapter
+      ..state = this
+      ..registerCallback(this);
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) =>
-      widget.scrollvIdxBuilder(widget.adapter.bindItemView);
+  Widget build(BuildContext context) => widget.buildScroll((_, position) =>
+      widget.adapter.bindItemView(widget.adapter.item(position), position));
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.adapter
+      ..removeCallback(this)
+      ..state = null;
+  }
 }
