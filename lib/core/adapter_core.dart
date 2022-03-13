@@ -3,10 +3,10 @@ part of '../part.dart';
 /// 数据操作接口
 abstract class DataBuildInterface<E> {
   /// 新增[item]
-  void add(E item);
+  void addItem(E item);
 
   /// 新增数组[items]
-  void addAll(List<E?> items);
+  void addItems(List<E?> items);
 
   /// 插入[item]到指定下标
   void insert(int position, E item);
@@ -94,28 +94,33 @@ mixin ItemDataManager<E>
   E? item(int position) => _dataList[position];
 
   @override
-  void add(E item) {
+  void addItem(E item) {
     _dataList.add(item);
+    notifyDataSetChanged();
   }
 
   @override
-  void addAll(List<E?> items) {
+  void addItems(List<E?> items) {
     _dataList.addAll(items);
+    notifyDataSetChanged();
   }
 
   @override
   void insert(int position, E item) {
     _dataList.insert(position, item);
+    notifyDataSetChanged();
   }
 
   @override
   void remove(E item) {
     _dataList.remove(item);
+    notifyDataSetChanged();
   }
 
   @override
   void removeAt(int position) {
     _dataList.removeAt(position);
+    notifyDataSetChanged();
   }
 
   @override
@@ -123,6 +128,7 @@ mixin ItemDataManager<E>
     var tmp = _dataList[current];
     _dataList[current] = _dataList[next];
     _dataList[next] = tmp;
+    notifyDataSetChanged();
   }
 
   @override

@@ -40,7 +40,7 @@ mixin DataBuildBase<T extends StatefulWidget> on DataBuildState<T> {
 /// 事件回调队列绑定器: [EventsBinder]
 abstract class DataBuildAdapter<E>
     with
-        ItemDataManager,
+        ItemDataManager<E>,
         ItemViewBinder<E>,
         ItemBuildInterface<E>,
         EventsBinder,
