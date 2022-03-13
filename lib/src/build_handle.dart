@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+part of '../part.dart';
 
 /// [item]
 /// [itemBinder]外部构建的视图

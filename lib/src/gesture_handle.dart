@@ -1,5 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:scroll_adapter/core/adapter_core.dart';
+part of '../part.dart';
 
 /// 为[ItemView]抽象一层手势接口
 /// 区别于[OnEventListener]，为手势处理器[GestureDetector]提供接口

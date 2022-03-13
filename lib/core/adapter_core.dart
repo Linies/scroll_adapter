@@ -1,3 +1,5 @@
+part of '../part.dart';
+
 /// 数据操作接口
 abstract class DataBuildInterface<E> {
   /// 新增[item]

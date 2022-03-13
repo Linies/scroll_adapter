@@ -1,7 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:scroll_adapter/core/adapter_core.dart';
-import 'package:scroll_adapter/src/build_handle.dart';
-import 'package:scroll_adapter/src/gesture_handle.dart';
+part of '../part.dart';
 
 /// 基于[StatefulWidget]、[State]使用的[List]数据构建接口
 abstract class DataBuildState<T extends StatefulWidget> extends State<T>
