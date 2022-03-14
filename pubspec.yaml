@@ -1,7 +1,8 @@
 name: scroll_adapter
-description: A new Flutter package project.
-version: 0.0.1
-homepage:
+description: adaptable scroll view
+version: 0.0.1-dev.1
+author: liniec<liniec50@gmail.com>
+homepage: https://github.com/Linies/scroll_adapter
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
