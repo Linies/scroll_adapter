@@ -16,12 +16,13 @@ typedef ScrollWithIndexedBuilder = Widget Function(
     IndexedWidgetBuilder indexedWidgetBuilder);
 
 /// 外部继承独立实现滑动视图的可适配类
-/// [buildScroll]外部在该方法实现具体滑动视图
 abstract class AdaptableScroll extends StatefulWidget {
   final ArrangeAdapter adapter;
 
   AdaptableScroll(this.adapter);
 
+  /// [buildScroll]被外部直接实现，在该方法实现具体滑动视图
+  /// [indexedWidgetBuilder]回调构建[itemView]方法
   Widget buildScroll(IndexedWidgetBuilder indexedWidgetBuilder);
 
   @override

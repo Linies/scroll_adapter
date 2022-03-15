@@ -181,14 +181,14 @@ class OnEventWrapper implements OnEventListener {
 
   @override
   void onDoubleCallback(item, int position) {
-    for (var listener in onItemLongClickListeners) {
+    for (var listener in onItemDoubleClickListeners) {
       listener(item, position);
     }
   }
 
   @override
   void onLongCallback(item, int position) {
-    for (var listener in onItemDoubleClickListeners) {
+    for (var listener in onItemLongClickListeners) {
       listener(item, position);
     }
   }
@@ -219,10 +219,10 @@ abstract class EventsBinder {
 }
 
 /// 点击事件监听
-typedef OnItemClickListener<E> = void Function(E item, int postion);
+typedef OnItemClickListener<E> = void Function(E item, int position);
 
 /// 长按事件监听
-typedef OnItemLongClickListener<E> = void Function(E item, int postion);
+typedef OnItemLongClickListener<E> = void Function(E item, int position);
 
 /// 双击事件监听
-typedef OnItemDoubleClickListener<E> = void Function(E item, int postion);
+typedef OnItemDoubleClickListener<E> = void Function(E item, int position);
