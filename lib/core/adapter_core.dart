@@ -28,6 +28,9 @@ abstract class DataBuildInterface<E> {
 
   /// 数据长度
   int get size;
+
+  /// 获取不可变数据列表
+  List<E?> get items;
 }
 
 /// 回调注册以及数据监听接口
@@ -92,6 +95,9 @@ mixin ItemDataManager<E>
 
   @override
   E? item(int position) => _dataList[position];
+
+  @override
+  List<E?> get items => List.unmodifiable(_dataList);
 
   @override
   void addItem(E item) {
