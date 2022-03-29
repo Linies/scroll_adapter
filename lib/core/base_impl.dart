@@ -79,19 +79,19 @@ abstract class DataBuildAdapter<E>
   OnEventListener get bindEventListener => _onEventListener;
 
   @override
-  void addItemClickListener(OnItemClickListener listener) =>
+  void addItemClickListener(OnItemClickListener<E?> listener) =>
       _onEventListener.addItemClickListener(listener);
 
   @override
-  void addItemLongClickListener(OnItemLongClickListener listener) =>
+  void addItemLongClickListener(OnItemLongClickListener<E?> listener) =>
       _onEventListener.addItemLongClickListener(listener);
 
   @override
-  void removeItemClickListener(OnItemClickListener listener) =>
+  void removeItemClickListener(OnItemClickListener<E?> listener) =>
       _onEventListener.removeItemClickListener(listener);
 
   @override
-  void removeItemLongClickListener(OnItemClickListener listener) =>
+  void removeItemLongClickListener(OnItemClickListener<E?> listener) =>
       _onEventListener.removeItemLongClickListener(listener);
 }
 
