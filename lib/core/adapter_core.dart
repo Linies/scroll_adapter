@@ -173,47 +173,47 @@ abstract class EventsListenerManage {
 }
 
 /// [OnEventWrapper]对[item]点击事件的包装实现
-class OnEventWrapper implements OnEventListener {
-  var onItemClickListeners = <OnItemClickListener>[];
-  var onItemLongClickListeners = <OnItemLongClickListener>[];
-  var onItemDoubleClickListeners = <OnItemDoubleClickListener>[];
+class OnEventWrapper<E> implements OnEventListener<E> {
+  var onItemClickListeners = <OnItemClickListener<E?>>[];
+  var onItemLongClickListeners = <OnItemLongClickListener<E?>>[];
+  var onItemDoubleClickListeners = <OnItemDoubleClickListener<E?>>[];
 
   @override
-  void onClickCallback(item, int position) {
+  void onClickCallback(E? item, int position) {
     for (var listener in onItemClickListeners) {
       listener(item, position);
     }
   }
 
   @override
-  void onDoubleCallback(item, int position) {
+  void onDoubleCallback(E? item, int position) {
     for (var listener in onItemDoubleClickListeners) {
       listener(item, position);
     }
   }
 
   @override
-  void onLongCallback(item, int position) {
+  void onLongCallback(E? item, int position) {
     for (var listener in onItemLongClickListeners) {
       listener(item, position);
     }
   }
 
   /// 添加监听事件
-  void addItemClickListener(OnItemClickListener listener) {
+  void addItemClickListener(OnItemClickListener<E?> listener) {
     onItemClickListeners.add(listener);
   }
 
-  void addItemLongClickListener(OnItemLongClickListener listener) {
+  void addItemLongClickListener(OnItemLongClickListener<E?> listener) {
     onItemLongClickListeners.add(listener);
   }
 
   /// 移除监听事件
-  void removeItemClickListener(OnItemClickListener listener) {
+  void removeItemClickListener(OnItemClickListener<E?> listener) {
     onItemClickListeners.remove(listener);
   }
 
-  void removeItemLongClickListener(OnItemLongClickListener listener) {
+  void removeItemLongClickListener(OnItemLongClickListener<E?> listener) {
     onItemClickListeners.remove(listener);
   }
 }

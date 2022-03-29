@@ -52,7 +52,7 @@ abstract class DataBuildAdapter<E>
 
   DataBuildState? state;
 
-  OnEventListener _onEventListener = OnEventWrapper();
+  OnEventListener<E> _onEventListener = OnEventWrapper<E>();
 
   @override
   HolderPort onItemHolderBuild(E? item, int position) =>
