@@ -148,7 +148,7 @@ mixin ItemDataManager<E>
 }
 
 /// 事件调用
-abstract class OnEventListener<E> implements EventsListenerManage {
+abstract class OnEventListener<E> implements EventsListenerManage<E> {
   /// 点击事件回调触发
   void onClickCallback(E? item, int position);
 
@@ -160,16 +160,16 @@ abstract class OnEventListener<E> implements EventsListenerManage {
 }
 
 /// 事件总线管理
-abstract class EventsListenerManage {
+abstract class EventsListenerManage<E> {
   /// 添加监听事件
-  void addItemClickListener(OnItemClickListener listener);
+  void addItemClickListener(OnItemClickListener<E?> listener);
 
-  void addItemLongClickListener(OnItemLongClickListener listener);
+  void addItemLongClickListener(OnItemLongClickListener<E?> listener);
 
   /// 移除监听事件
-  void removeItemClickListener(OnItemClickListener listener);
+  void removeItemClickListener(OnItemClickListener<E?> listener);
 
-  void removeItemLongClickListener(OnItemLongClickListener listener);
+  void removeItemLongClickListener(OnItemLongClickListener<E?> listener);
 }
 
 /// [OnEventWrapper]对[item]点击事件的包装实现
