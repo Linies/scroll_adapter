@@ -122,9 +122,9 @@ class GestureWrapper<E> extends StatelessWidget {
         onTap: () {
           onEventListener?.onClickCallback(item, position);
         },
-        onDoubleTap: () {
-          onEventListener?.onDoubleCallback(item, position);
-        },
+        // onDoubleTap: () {
+        //   onEventListener?.onDoubleCallback(item, position);
+        // },
         onLongPress: () {
           onEventListener?.onLongCallback(item, position);
         },

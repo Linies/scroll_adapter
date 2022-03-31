@@ -20,6 +20,9 @@ abstract class DataBuildInterface<E> {
   /// 清除列表
   void clear();
 
+  /// 清除并新增
+  void addItemsClear(List<E?> items);
+
   /// 交换下标位置
   void swap(int current, int next);
 
@@ -140,6 +143,13 @@ mixin ItemDataManager<E>
   @override
   void clear() {
     _dataList.clear();
+    notifyDataSetChanged();
+  }
+
+  @override
+  void addItemsClear(List<E?> items) {
+    _dataList.clear();
+    _dataList.addAll(items);
     notifyDataSetChanged();
   }
 
