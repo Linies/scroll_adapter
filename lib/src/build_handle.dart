@@ -15,19 +15,26 @@ class ItemHolder<E> extends StatefulWidget implements HolderPort {
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => ItemHolderState();
+  State<StatefulWidget> createState() => ItemHolderState<E>();
 
   @override
   void notify() {
+    // ignore: invalid_use_of_protected_member
     _weakState[this]?.setState(() {});
   }
 }
 
-class ItemHolderState extends State<ItemHolder> {
+class ItemHolderState<E> extends State<ItemHolder> {
   @override
   void initState() {
     widget._weakState[widget] = this;
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant ItemHolder oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    widget._weakState[widget] = this;
   }
 
   @override
@@ -39,6 +46,9 @@ class ItemHolderState extends State<ItemHolder> {
 mixin ItemViewBinder<E> {
   // 将[Item]绑定对应[ItemHolder]
   Widget bindItemView(E? item, int position);
+
+  // 外层[ItemView]构建方法
+  Widget buildItemView(E? item, int position);
 }
 
 /// [itemView]刷新回调接口
@@ -49,9 +59,6 @@ abstract class HolderPort {
 
 /// [itemView]构建器
 abstract class ItemBuildInterface<E> {
-  /// [HolderPort]刷新接口实现类创建
-  HolderPort onItemHolderBuild(E? item, int position);
-
   /// 上层视图构建方法
   Widget onItemUpdate(E? item, int position);
 }

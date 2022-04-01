@@ -40,7 +40,7 @@ class _ArrangeState extends DataBuildState<AdaptableScroll> with DataBuildBase {
 
   @override
   Widget build(BuildContext context) => widget.buildScroll((_, position) =>
-      widget.adapter.bindItemView(widget.adapter.item(position), position));
+      widget.adapter.buildItemView(widget.adapter.item(position), position));
 
   @override
   void dispose() {

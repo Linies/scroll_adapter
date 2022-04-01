@@ -54,23 +54,23 @@ abstract class DataBuildAdapter<E>
 
   OnEventListener<E> _onEventListener = OnEventWrapper<E>();
 
-  @override
-  HolderPort onItemHolderBuild(E? item, int position) =>
-      ItemHolder(item, position, this);
-
   @mustCallSuper
   @override
   Widget onItemUpdate(E? item, int position);
 
   @override
-  Widget bindItemView(E? item, int position) {
+  Widget bindItemView(E? item, int position) => onItemUpdate(item, position);
+
+  @override
+  Widget buildItemView(E? item, int position) {
+    var holder = ItemHolder(item, position, this);
     // [HolderPort]与上层建立视图进行绑定
-    state?._addHolder(position, onItemHolderBuild(item, position));
+    state?._addHolder(position, holder);
     return GestureWrapper(
       item,
       position,
       gestureItem: _gestureCallback,
-      child: onItemUpdate(item, position),
+      child: holder,
       eventsBinder: this,
     );
   }

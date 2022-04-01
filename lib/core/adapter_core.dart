@@ -84,6 +84,7 @@ mixin ItemDataManager<E>
 
   @override
   void notifyDataSetChanged() {
+    debugPrint('notifyDataSetChanged --> {${this.runtimeType}}');
     _dataSetCallbacks.forEach((callback) {
       callback.onDataSetChanged();
     });
@@ -91,6 +92,7 @@ mixin ItemDataManager<E>
 
   @override
   void notifyItemChanged(int position) {
+    debugPrint('notifyItemChanged: $position --> {${this.runtimeType}');
     _dataSetCallbacks.forEach((callback) {
       callback.onItemsChanged(position, position);
     });
