@@ -41,6 +41,12 @@ class ItemHolderState<E> extends State<ItemHolder> {
   @override
   Widget build(BuildContext context) =>
       widget.itemBinder.bindItemView(widget.item, widget.position);
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.itemBinder.onItemViewDispose(widget.item, widget.position);
+  }
 }
 
 /// [item]绑定器
@@ -53,6 +59,8 @@ mixin ItemViewBinder<E> {
 
   // [ItemView]初始化调用
   void onInitItemView(E? item, int position);
+
+  void onItemViewDispose(E? item, int position);
 }
 
 /// [itemView]刷新回调接口

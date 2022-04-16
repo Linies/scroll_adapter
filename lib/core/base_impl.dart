@@ -79,6 +79,9 @@ abstract class DataBuildAdapter<E>
   }
 
   @override
+  void onItemViewDispose(E? item, int position) {}
+
+  @override
   OnEventListener get bindEventListener => _onEventListener;
 
   @override

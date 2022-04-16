@@ -29,3 +29,7 @@
 ## 0.0.6-dev
 
 * feat 提供ItemView初始化的方法
+
+## 0.0.7-dev
+
+* feat 提供onItemViewDispose
