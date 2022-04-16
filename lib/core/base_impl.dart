@@ -54,6 +54,9 @@ abstract class DataBuildAdapter<E>
 
   OnEventListener<E> _onEventListener = OnEventWrapper<E>();
 
+  @override
+  void onInitItemView(E? item, int position) {}
+
   @mustCallSuper
   @override
   Widget onItemUpdate(E? item, int position);

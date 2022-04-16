@@ -25,3 +25,7 @@
 ## 0.0.5-dev
 
 * fix 修复holder绑定问题
+
+## 0.0.6-dev
+
+* feat 提供ItemView初始化的方法

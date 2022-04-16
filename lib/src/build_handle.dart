@@ -28,6 +28,7 @@ class ItemHolderState<E> extends State<ItemHolder> {
   @override
   void initState() {
     widget._weakState[widget] = this;
+    widget.itemBinder.onInitItemView(widget.item, widget.position);
     super.initState();
   }
 
@@ -49,6 +50,9 @@ mixin ItemViewBinder<E> {
 
   // 外层[ItemView]构建方法
   Widget buildItemView(E? item, int position);
+
+  // [ItemView]初始化调用
+  void onInitItemView(E? item, int position);
 }
 
 /// [itemView]刷新回调接口
