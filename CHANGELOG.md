@@ -37,3 +37,7 @@
 ## 0.0.8-dev
 
 * feat 支持点击事件拦截、提供可点击适配类
+
+## 0.0.9-dev
+
+* feat checkable以mixin形式

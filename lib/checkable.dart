@@ -2,7 +2,6 @@ import 'dart:collection';
 
 import 'package:flutter/widgets.dart';
 import 'package:scroll_adapter/arrange_adapter.dart';
-import 'package:scroll_adapter/part.dart';
 
 enum CheckType {
   // 单选
@@ -11,18 +10,12 @@ enum CheckType {
   multi
 }
 
-abstract class CheckableAdapter<E> extends ArrangeAdapter<E> {
+mixin Checkable<E> on ArrangeAdapter<E> {
   /// 选中项
   var _checks = HashSet.of([]);
 
   /// 选中模式
-  CheckType checkType;
-
-  CheckableAdapter(
-      {this.checkType = CheckType.multi,
-      DataBuildState? state,
-      GestureCallback? gestureCallback})
-      : super(state: state, gestureCallback: gestureCallback);
+  CheckType checkType = CheckType.multi;
 
   /// 可选项视图更新
   @mustCallSuper
