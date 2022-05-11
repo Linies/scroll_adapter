@@ -1,9 +1,5 @@
 import 'package:flutter/widgets.dart';
-
-import 'scroll_adapter.dart';
-
-export 'package:scroll_adapter/arrange_adapter.dart'
-    show ArrangeAdapter, AdaptableScroll;
+import 'package:scroll_adapter/part.dart';
 
 /// 滑动适配器业务层接口
 abstract class ArrangeAdapter<E> extends DataBuildAdapter<E> {
@@ -16,7 +12,8 @@ typedef ScrollWithIndexedBuilder = Widget Function(
     IndexedWidgetBuilder indexedWidgetBuilder);
 
 /// 外部继承独立实现滑动视图的可适配类
-abstract class AdaptableScroll<T extends ArrangeAdapter> extends StatefulWidget {
+abstract class AdaptableScroll<T extends ArrangeAdapter>
+    extends StatefulWidget {
   final T adapter;
 
   AdaptableScroll(this.adapter);

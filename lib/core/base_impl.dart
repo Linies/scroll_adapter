@@ -52,7 +52,7 @@ abstract class DataBuildAdapter<E>
 
   DataBuildState? state;
 
-  OnEventListener<E> _onEventListener = OnEventWrapper<E>();
+  late OnEventListener<E> _onEventListener = OnEventWrapper<E>(this);
 
   @override
   void onInitItemView(E? item, int position) {}

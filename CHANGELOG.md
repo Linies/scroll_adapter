@@ -33,3 +33,7 @@
 ## 0.0.7-dev
 
 * feat 提供onItemViewDispose
+
+## 0.0.8-dev
+
+* feat 支持点击事件拦截、提供可点击适配类

@@ -29,6 +29,9 @@ abstract class DataBuildInterface<E> {
   /// 获取下标[position]数据项
   E? item(int position);
 
+  /// 获取[item]数据对应首个下标
+  int indexOfItem(E item);
+
   /// 数据长度
   int get size;
 
@@ -102,6 +105,9 @@ mixin ItemDataManager<E>
   E? item(int position) => _dataList[position];
 
   @override
+  int indexOfItem(E item) => _dataList.indexOf(item);
+
+  @override
   List<E?> get items => List.unmodifiable(_dataList);
 
   @override
@@ -173,6 +179,12 @@ abstract class OnEventListener<E> implements EventsListenerManage<E> {
 
 /// 事件总线管理
 abstract class EventsListenerManage<E> {
+  /// 点击事件可拦截[onItemClickListeners]
+  bool onItemClickable(E? item, int position) => true;
+
+  /// 长按事件可拦截[onItemLongClickListeners]
+  bool onItemLongClickable(E? item, int position) => true;
+
   /// 添加监听事件
   void addItemClickListener(OnItemClickListener<E?> listener);
 
@@ -185,15 +197,22 @@ abstract class EventsListenerManage<E> {
 }
 
 /// [OnEventWrapper]对[item]点击事件的包装实现
-class OnEventWrapper<E> implements OnEventListener<E> {
+class OnEventWrapper<E> extends OnEventListener<E> {
+  OnEventWrapper([this._stateEventsListenerManage]);
+
+  final EventsListenerManage? _stateEventsListenerManage;
+
   var onItemClickListeners = <OnItemClickListener<E?>>[];
   var onItemLongClickListeners = <OnItemLongClickListener<E?>>[];
   var onItemDoubleClickListeners = <OnItemDoubleClickListener<E?>>[];
 
   @override
   void onClickCallback(E? item, int position) {
-    for (var listener in onItemClickListeners) {
-      listener(item, position);
+    print('OnEventWrapper.onClickCallback');
+    if (onItemClickable(item, position)) {
+      for (var listener in onItemClickListeners) {
+        listener(item, position);
+      }
     }
   }
 
@@ -206,8 +225,10 @@ class OnEventWrapper<E> implements OnEventListener<E> {
 
   @override
   void onLongCallback(E? item, int position) {
-    for (var listener in onItemLongClickListeners) {
-      listener(item, position);
+    if (onItemLongClickable(item, position)) {
+      for (var listener in onItemLongClickListeners) {
+        listener(item, position);
+      }
     }
   }
 
@@ -227,6 +248,17 @@ class OnEventWrapper<E> implements OnEventListener<E> {
 
   void removeItemLongClickListener(OnItemLongClickListener<E?> listener) {
     onItemClickListeners.remove(listener);
+  }
+
+  @override
+  bool onItemClickable(E? item, int position) {
+    return _stateEventsListenerManage?.onItemClickable(item, position) ?? true;
+  }
+
+  @override
+  bool onItemLongClickable(E? item, int position) {
+    return _stateEventsListenerManage?.onItemLongClickable(item, position) ??
+        true;
   }
 }
 
