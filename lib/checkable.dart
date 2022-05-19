@@ -12,7 +12,9 @@ enum CheckType {
 
 mixin Checkable<E> on ArrangeAdapter<E> {
   /// 选中项
-  var _checks = HashSet.of([]);
+  var _checks = HashSet.of(<E?>[]);
+
+  List<E?> get checkedItems => _checks.toList();
 
   /// 选中模式
   CheckType checkType = CheckType.multi;

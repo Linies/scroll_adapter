@@ -45,3 +45,7 @@
 ## 0.1.0-dev
 
 * feat 支持ItemView滑动手势监听
+
+## 0.1.1-dev
+
+* fix 支持checkable暴露选中项
