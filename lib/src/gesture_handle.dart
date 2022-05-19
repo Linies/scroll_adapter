@@ -5,23 +5,53 @@ part of '../part.dart';
 /// 可接受对应[DragDetail]手势信息
 abstract class GestureCallback {
   /// 点击
-  void onTap(TapDownDetails details);
+  void onTapDown(TapDownDetails details);
 
   /// 双击
-  void onDoubleTap(TapDownDetails details);
+  void onDoubleTapDown(TapDownDetails details);
 
   /// 长按
-  void onLongPress(LongPressStartDetails details);
+  void onLongPressStart(LongPressStartDetails details);
+
+  void onVerticalDragDown(DragDownDetails details);
+
+  void onVerticalDragStart(DragStartDetails details);
+
+  void onVerticalDragEnd(DragEndDetails details);
+
+  void onHorizontalDragDown(DragDownDetails details);
+
+  void onHorizontalDragStart(DragStartDetails details);
+
+  void onHorizontalDragEnd(DragEndDetails details);
 }
 
 /// 代理实现类
 class GestureItemDetector implements GestureCallback {
   @override
-  void onTap(TapDownDetails details) {}
+  void onTapDown(TapDownDetails details) {}
 
   @override
-  void onDoubleTap(TapDownDetails details) {}
+  void onDoubleTapDown(TapDownDetails details) {}
 
   @override
-  void onLongPress(LongPressStartDetails details) {}
+  void onLongPressStart(LongPressStartDetails details) {}
+
+  @override
+  void onVerticalDragDown(DragDownDetails details) {}
+
+  @override
+  void onVerticalDragEnd(DragEndDetails details) {}
+
+  @override
+  void onVerticalDragStart(DragStartDetails details) {}
+
+  @override
+  void onHorizontalDragDown(DragDownDetails details) {}
+
+  @override
+  void onHorizontalDragEnd(DragEndDetails details) {}
+
+  @override
+  void onHorizontalDragStart(DragStartDetails details) {}
 }

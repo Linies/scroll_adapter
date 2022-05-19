@@ -41,3 +41,7 @@
 ## 0.0.9-dev
 
 * feat checkable以mixin形式
+
+## 0.1.0-dev
+
+* feat 支持ItemView滑动手势监听

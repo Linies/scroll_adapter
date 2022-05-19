@@ -134,15 +134,15 @@ class GestureWrapper<E> extends StatelessWidget {
         onLongPress: () {
           onEventListener?.onLongCallback(item, position);
         },
-        onTapDown: (detail) {
-          gestureItem?.onTap(detail);
-        },
-        onDoubleTapDown: (detail) {
-          gestureItem?.onDoubleTap(detail);
-        },
-        onLongPressStart: (detail) {
-          gestureItem?.onLongPress(detail);
-        },
+        onTapDown: gestureItem?.onTapDown,
+        onDoubleTapDown: gestureItem?.onDoubleTapDown,
+        onLongPressStart: gestureItem?.onLongPressStart,
+        onVerticalDragDown: gestureItem?.onVerticalDragDown,
+        onVerticalDragStart: gestureItem?.onVerticalDragStart,
+        onVerticalDragEnd: gestureItem?.onVerticalDragEnd,
+        onHorizontalDragDown: gestureItem?.onHorizontalDragDown,
+        onHorizontalDragStart: gestureItem?.onHorizontalDragStart,
+        onHorizontalDragEnd: gestureItem?.onHorizontalDragEnd,
         child: child,
       );
 }
