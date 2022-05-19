@@ -124,25 +124,24 @@ class GestureWrapper<E> extends StatelessWidget {
   }) : onEventListener = eventsBinder?.bindEventListener;
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-        onTap: () {
-          onEventListener?.onClickCallback(item, position);
-        },
-        // onDoubleTap: () {
-        //   onEventListener?.onDoubleCallback(item, position);
-        // },
-        onLongPress: () {
-          onEventListener?.onLongCallback(item, position);
-        },
-        onTapDown: gestureItem?.onTapDown,
-        onDoubleTapDown: gestureItem?.onDoubleTapDown,
-        onLongPressStart: gestureItem?.onLongPressStart,
-        onVerticalDragDown: gestureItem?.onVerticalDragDown,
-        onVerticalDragStart: gestureItem?.onVerticalDragStart,
-        onVerticalDragEnd: gestureItem?.onVerticalDragEnd,
-        onHorizontalDragDown: gestureItem?.onHorizontalDragDown,
-        onHorizontalDragStart: gestureItem?.onHorizontalDragStart,
-        onHorizontalDragEnd: gestureItem?.onHorizontalDragEnd,
-        child: child,
+  Widget build(BuildContext context) => Listener(
+        onPointerDown: gestureItem?.onPointerDown,
+        onPointerCancel: gestureItem?.onPointerCancel,
+        onPointerUp: gestureItem?.onPointerUp,
+        child: GestureDetector(
+          onTap: () {
+            onEventListener?.onClickCallback(item, position);
+          },
+          // onDoubleTap: () {
+          //   onEventListener?.onDoubleCallback(item, position);
+          // },
+          onLongPress: () {
+            onEventListener?.onLongCallback(item, position);
+          },
+          onTapDown: gestureItem?.onTapDown,
+          onDoubleTapDown: gestureItem?.onDoubleTapDown,
+          onLongPressStart: gestureItem?.onLongPressStart,
+          child: child,
+        ),
       );
 }

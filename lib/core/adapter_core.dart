@@ -208,7 +208,6 @@ class OnEventWrapper<E> extends OnEventListener<E> {
 
   @override
   void onClickCallback(E? item, int position) {
-    print('OnEventWrapper.onClickCallback');
     if (onItemClickable(item, position)) {
       for (var listener in onItemClickListeners) {
         listener(item, position);

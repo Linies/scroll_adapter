@@ -13,17 +13,11 @@ abstract class GestureCallback {
   /// 长按
   void onLongPressStart(LongPressStartDetails details);
 
-  void onVerticalDragDown(DragDownDetails details);
+  void onPointerDown(PointerDownEvent event);
 
-  void onVerticalDragStart(DragStartDetails details);
+  void onPointerUp(PointerUpEvent event);
 
-  void onVerticalDragEnd(DragEndDetails details);
-
-  void onHorizontalDragDown(DragDownDetails details);
-
-  void onHorizontalDragStart(DragStartDetails details);
-
-  void onHorizontalDragEnd(DragEndDetails details);
+  void onPointerCancel(PointerCancelEvent event);
 }
 
 /// 代理实现类
@@ -38,20 +32,11 @@ class GestureItemDetector implements GestureCallback {
   void onLongPressStart(LongPressStartDetails details) {}
 
   @override
-  void onVerticalDragDown(DragDownDetails details) {}
+  void onPointerCancel(PointerCancelEvent event) {}
 
   @override
-  void onVerticalDragEnd(DragEndDetails details) {}
+  void onPointerDown(PointerDownEvent event) {}
 
   @override
-  void onVerticalDragStart(DragStartDetails details) {}
-
-  @override
-  void onHorizontalDragDown(DragDownDetails details) {}
-
-  @override
-  void onHorizontalDragEnd(DragEndDetails details) {}
-
-  @override
-  void onHorizontalDragStart(DragStartDetails details) {}
+  void onPointerUp(PointerUpEvent event) {}
 }

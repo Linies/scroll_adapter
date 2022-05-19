@@ -49,3 +49,7 @@
 ## 0.1.1-dev
 
 * fix 支持checkable暴露选中项
+
+## 0.1.2-dev
+
+* fix 通过Listener支持事件分发不消费
