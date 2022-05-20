@@ -19,8 +19,10 @@ class ItemHolder<E> extends StatefulWidget implements HolderPort {
 
   @override
   void notify() {
-    // ignore: invalid_use_of_protected_member
-    _weakState[this]?.setState(() {});
+    if (_weakState[this]?.mounted ?? false) {
+      // ignore: invalid_use_of_protected_member
+      _weakState[this]?.setState(() {});
+    }
   }
 }
 

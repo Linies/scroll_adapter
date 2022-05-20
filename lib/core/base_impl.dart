@@ -54,6 +54,8 @@ abstract class DataBuildAdapter<E>
 
   late OnEventListener<E> _onEventListener = OnEventWrapper<E>(this);
 
+  GestureCallback? get gestureCallback => _gestureCallback;
+
   @override
   void onInitItemView(E? item, int position) {}
 

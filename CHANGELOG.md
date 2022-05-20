@@ -53,3 +53,11 @@
 ## 0.1.2-dev
 
 * fix 通过Listener支持事件分发不消费
+
+## 0.1.3-dev
+
+* fix 暴露点击代理对象getter
+
+## 0.1.4-dev
+
+* fix setState() called after dispose()
