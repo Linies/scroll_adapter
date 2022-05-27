@@ -46,4 +46,13 @@ class _ArrangeState extends DataBuildState<AdaptableScroll> with DataBuildBase {
       ..removeCallback(this)
       ..state = null;
   }
+
+  @override
+  void didUpdateWidget(covariant AdaptableScroll<ArrangeAdapter> oldWidget) {
+    widget.adapter
+      ..removeCallback(null)
+      ..state = this
+      ..registerCallback(this);
+    super.didUpdateWidget(oldWidget);
+  }
 }

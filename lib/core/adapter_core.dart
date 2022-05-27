@@ -262,9 +262,9 @@ class OnEventWrapper<E> extends OnEventListener<E> {
 }
 
 /// 事件绑定器
-abstract class EventsBinder {
+abstract class EventsBinder<E> {
   /// [OnEventListener]总线绑定[itemView]
-  OnEventListener get bindEventListener;
+  OnEventListener<E> get bindEventListener;
 }
 
 /// 点击事件监听

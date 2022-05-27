@@ -18,6 +18,12 @@ abstract class GestureCallback {
   void onPointerUp(PointerUpEvent event);
 
   void onPointerCancel(PointerCancelEvent event);
+
+  void onPointerMove(PointerMoveEvent event);
+
+  void onPointerHover(PointerHoverEvent event);
+
+  void onPointerSignal(PointerSignalEvent event);
 }
 
 /// 代理实现类
@@ -39,4 +45,13 @@ class GestureItemDetector implements GestureCallback {
 
   @override
   void onPointerUp(PointerUpEvent event) {}
+
+  @override
+  void onPointerHover(PointerHoverEvent event) {}
+
+  @override
+  void onPointerMove(PointerMoveEvent event) {}
+
+  @override
+  void onPointerSignal(PointerSignalEvent event) {}
 }

@@ -61,3 +61,7 @@
 ## 0.1.4-dev
 
 * fix setState() called after dispose()
+
+## 0.1.5-dev
+
+* fix didUpdateWidget reset listener

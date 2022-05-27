@@ -43,8 +43,8 @@ abstract class DataBuildAdapter<E>
         ItemDataManager<E>,
         ItemViewBinder<E>,
         ItemBuildInterface<E>,
-        EventsBinder,
-        EventsListenerManage {
+        EventsBinder<E>,
+        EventsListenerManage<E> {
   DataBuildAdapter({this.state, GestureCallback? gestureCallback})
       : _gestureCallback = gestureCallback;
 
@@ -84,7 +84,7 @@ abstract class DataBuildAdapter<E>
   void onItemViewDispose(E? item, int position) {}
 
   @override
-  OnEventListener get bindEventListener => _onEventListener;
+  OnEventListener<E> get bindEventListener => _onEventListener;
 
   @override
   void addItemClickListener(OnItemClickListener<E?> listener) =>
@@ -130,6 +130,9 @@ class GestureWrapper<E> extends StatelessWidget {
         onPointerDown: gestureItem?.onPointerDown,
         onPointerCancel: gestureItem?.onPointerCancel,
         onPointerUp: gestureItem?.onPointerUp,
+        onPointerMove: gestureItem?.onPointerMove,
+        onPointerHover: gestureItem?.onPointerHover,
+        onPointerSignal: gestureItem?.onPointerSignal,
         child: GestureDetector(
           onTap: () {
             onEventListener?.onClickCallback(item, position);
