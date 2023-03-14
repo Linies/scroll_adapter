@@ -23,10 +23,10 @@ abstract class AdaptableScroll<T extends ArrangeAdapter>
   Widget buildScroll(IndexedWidgetBuilder indexedWidgetBuilder);
 
   @override
-  _ArrangeState createState() => _ArrangeState();
+  ArrangeState createState() => ArrangeState();
 }
 
-class _ArrangeState extends DataBuildState<AdaptableScroll> with DataBuildBase {
+class ArrangeState extends DataBuildState<AdaptableScroll> with DataBuildBase {
   @override
   void initState() {
     widget.adapter

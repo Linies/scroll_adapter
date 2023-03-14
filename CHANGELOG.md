@@ -65,3 +65,7 @@
 ## 0.1.5-dev
 
 * fix didUpdateWidget reset listener
+
+## 0.1.6-dev
+
+* refactor 暴露列表构建内部状态类
