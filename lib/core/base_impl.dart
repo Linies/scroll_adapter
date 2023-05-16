@@ -126,27 +126,23 @@ class GestureWrapper<E> extends StatelessWidget {
   }) : onEventListener = eventsBinder?.bindEventListener;
 
   @override
-  Widget build(BuildContext context) => Listener(
-        onPointerDown: gestureItem?.onPointerDown,
-        onPointerCancel: gestureItem?.onPointerCancel,
-        onPointerUp: gestureItem?.onPointerUp,
-        onPointerMove: gestureItem?.onPointerMove,
-        onPointerHover: gestureItem?.onPointerHover,
-        onPointerSignal: gestureItem?.onPointerSignal,
-        child: GestureDetector(
-          onTap: () {
-            onEventListener?.onClickCallback(item, position);
-          },
-          // onDoubleTap: () {
-          //   onEventListener?.onDoubleCallback(item, position);
-          // },
-          onLongPress: () {
-            onEventListener?.onLongCallback(item, position);
-          },
-          onTapDown: gestureItem?.onTapDown,
-          onDoubleTapDown: gestureItem?.onDoubleTapDown,
-          onLongPressStart: gestureItem?.onLongPressStart,
-          child: child,
-        ),
+  Widget build(BuildContext context) => GestureDetector(
+        doubleTapTimeConsider: 300,
+        longPressTimeConsider: 350,
+        onTap: (TapEvent event) {
+          onEventListener?.onClickCallback(item, position);
+        },
+        // onDoubleTap: () {
+        //   onEventListener?.onDoubleCallback(item, position);
+        // },
+        onLongPress: (TapEvent event) {
+          onEventListener?.onLongCallback(item, position);
+        },
+        onLongPressEnd: gestureItem?.onLongPressEnd,
+        onMoveStart: gestureItem?.onMoveStart,
+        onMoveEnd: gestureItem?.onMoveEnd,
+        onScrollEvent: gestureItem?.onScrollEvent,
+        behavior: HitTestBehavior.opaque,
+        child: child,
       );
 }

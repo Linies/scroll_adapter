@@ -5,53 +5,38 @@ part of '../part.dart';
 /// 可接受对应[DragDetail]手势信息
 abstract class GestureCallback {
   /// 点击
-  void onTapDown(TapDownDetails details);
+  void onTapDown(TapEvent event);
 
   /// 双击
-  void onDoubleTapDown(TapDownDetails details);
+  void onDoubleTapDown(TapEvent event);
 
   /// 长按
-  void onLongPressStart(LongPressStartDetails details);
+  void onLongPressEnd();
 
-  void onPointerDown(PointerDownEvent event);
+  void onMoveStart(MoveEvent event);
 
-  void onPointerUp(PointerUpEvent event);
+  void onMoveEnd(MoveEvent event);
 
-  void onPointerCancel(PointerCancelEvent event);
-
-  void onPointerMove(PointerMoveEvent event);
-
-  void onPointerHover(PointerHoverEvent event);
-
-  void onPointerSignal(PointerSignalEvent event);
+  void onScrollEvent(ScrollEvent event);
 }
 
 /// 代理实现类
 class GestureItemDetector implements GestureCallback {
   @override
-  void onTapDown(TapDownDetails details) {}
+  void onTapDown(TapEvent event) {}
 
   @override
-  void onDoubleTapDown(TapDownDetails details) {}
+  void onDoubleTapDown(TapEvent event) {}
 
   @override
-  void onLongPressStart(LongPressStartDetails details) {}
+  void onLongPressEnd() {}
 
   @override
-  void onPointerCancel(PointerCancelEvent event) {}
+  void onMoveEnd(MoveEvent event) {}
 
   @override
-  void onPointerDown(PointerDownEvent event) {}
+  void onMoveStart(MoveEvent event) {}
 
   @override
-  void onPointerUp(PointerUpEvent event) {}
-
-  @override
-  void onPointerHover(PointerHoverEvent event) {}
-
-  @override
-  void onPointerMove(PointerMoveEvent event) {}
-
-  @override
-  void onPointerSignal(PointerSignalEvent event) {}
+  void onScrollEvent(ScrollEvent event) {}
 }
