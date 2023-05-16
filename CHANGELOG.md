@@ -73,3 +73,7 @@
 ## 0.1.7-dev
 
 * refactor 内部自定义手势事件
+
+## 0.1.7-dev
+
+* refactor 固定最低dart版本
